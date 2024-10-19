@@ -1,0 +1,32 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: auth-server
+  main:
+    banner-mode: off
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      authorizationserver:
+        client:
+          api-client:
+            registration:
+              client-id: ${OAUTH2_CLIENT_ID:api-gateway}
+              client-secret: ${OAUTH2_CLIENT_SECRET:{noop}secret}
+              client-authentication-methods:
+                - 'client_secret_basic'
+              authorization-grant-types:
+                - 'authorization_code'
+              redirect-uris:
+                - ${OAUTH2_REDIRECT_URI:http://localhost:8080/login/oauth2/code/api-gateway}
+              scopes:
+                - 'openid'
+                - 'profile'
+
+logging:
+  level:
+    org.springframework.security: debug
