@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  main:
+    banner-mode: off
+  security:
+    oauth2:
+      client:
+        registration:
+          auth-server:
+            client-id: ${OAUTH2_CLIENT_ID:api-gateway}
+            client-secret: ${OAUTH2_CLIENT_SECRET:secret}
+            client-authentication-method: 'client_secret_basic'
+            authorization-grant-type: 'authorization_code'
+            redirect-uri: '{baseUrl}/login/oauth2/code/api-gateway'
+            scope:
+              - 'openid'
+              - 'profile'
+        provider:
+          auth-server:
+            issuer-uri: ${OAUTH2_ISSUER_URI:http://localhost:9000}
+
+logging:
+  level:
+    org.springframework.security: debug
