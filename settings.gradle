@@ -2,3 +2,4 @@ rootProject.name = 'spring-security-oauth2-demo'
 
 include 'auth-server'
 include 'api-gateway'
+include 'user-resource'

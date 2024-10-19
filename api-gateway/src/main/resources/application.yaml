@@ -6,6 +6,15 @@ spring:
     name: api-gateway
   main:
     banner-mode: off
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+      routes:
+        - id: api-route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/**
   security:
     oauth2:
       client:
