@@ -22,7 +22,9 @@ spring:
               authorization-grant-types:
                 - 'authorization_code'
               redirect-uris:
-                - ${OAUTH2_REDIRECT_URI:http://localhost:8080/login/oauth2/code/api-gateway}
+                - ${OAUTH2_LOGIN_REDIRECT_URI:http://localhost:8080/login/oauth2/code/api-gateway}
+              post-logout-redirect-uris:
+                - ${OAUTH2_LOGOUT_REDIRECT_URI:http://localhost:5173}
               scopes:
                 - 'openid'
                 - 'profile'

@@ -9,7 +9,15 @@ spring:
   cloud:
     gateway:
       default-filters:
-        - TokenRelay
+        - SaveSession=
+        - TokenRelay=
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allow-credentials: true
+            allowed-origins:
+              - 'http://localhost:5173'
       routes:
         - id: api-route
           uri: http://localhost:8081
